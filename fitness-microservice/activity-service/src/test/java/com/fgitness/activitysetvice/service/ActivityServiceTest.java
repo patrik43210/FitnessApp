@@ -8,6 +8,7 @@ import com.fgitness.activitysetvice.model.ActivityType;
 import com.fgitness.activitysetvice.repository.ActivityRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -25,7 +26,8 @@ class ActivityServiceTest {
     void setup() {
         activityRepository = mock(ActivityRepository.class);
         userValidationService = mock(UserValidationService.class);
-        activityService = new ActivityService(activityRepository, userValidationService);
+        RabbitTemplate rabbitTemplate = mock(RabbitTemplate.class);
+        activityService = new ActivityService(activityRepository, rabbitTemplate, userValidationService);
     }
 
     @Test

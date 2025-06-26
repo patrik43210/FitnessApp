@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="890a2934-3d7e-4e76-aed8-725112a0f869" name="Changes" comment="" />
+    <list default="true" id="890a2934-3d7e-4e76-aed8-725112a0f869" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/RabbitMqConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/service/ActivityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fgitness/activitysetvice/service/ActivityServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fgitness/activitysetvice/service/ActivityServiceTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
