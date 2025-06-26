@@ -1,4 +1,4 @@
-package com.fgitness.activitysetvice;
+package com.fitness.activitysetvice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

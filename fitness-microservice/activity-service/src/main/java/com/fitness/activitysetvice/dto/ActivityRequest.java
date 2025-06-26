@@ -1,6 +1,6 @@
-package com.fgitness.activitysetvice.dto;
+package com.fitness.activitysetvice.dto;
 
-import com.fgitness.activitysetvice.model.ActivityType;
+import com.fitness.activitysetvice.model.ActivityType;
 import lombok.Data;
 
 import java.time.LocalDateTime;

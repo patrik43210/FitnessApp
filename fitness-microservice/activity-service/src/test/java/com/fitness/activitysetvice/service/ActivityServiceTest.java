@@ -1,13 +1,14 @@
-package com.fgitness.activitysetvice.service;
+package com.fitness.activitysetvice.service;
 
-import com.fgitness.activitysetvice.dto.ActivityRequest;
-import com.fgitness.activitysetvice.dto.ActivityResponse;
-import com.fgitness.activitysetvice.exception.UserNotFoundException;
-import com.fgitness.activitysetvice.model.Activity;
-import com.fgitness.activitysetvice.model.ActivityType;
-import com.fgitness.activitysetvice.repository.ActivityRepository;
+import com.fitness.activitysetvice.dto.ActivityRequest;
+import com.fitness.activitysetvice.dto.ActivityResponse;
+import com.fitness.activitysetvice.exception.UserNotFoundException;
+import com.fitness.activitysetvice.model.Activity;
+import com.fitness.activitysetvice.model.ActivityType;
+import com.fitness.activitysetvice.repository.ActivityRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 import java.time.LocalDateTime;
@@ -25,7 +26,7 @@ class ActivityServiceTest {
     @BeforeEach
     void setup() {
         activityRepository = mock(ActivityRepository.class);
-        userValidationService = mock(UserValidationService.class);
+        userValidationService = Mockito.mock(UserValidationService.class);
         RabbitTemplate rabbitTemplate = mock(RabbitTemplate.class);
         activityService = new ActivityService(activityRepository, rabbitTemplate, userValidationService);
     }

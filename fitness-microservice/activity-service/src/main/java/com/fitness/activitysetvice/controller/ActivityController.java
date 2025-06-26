@@ -1,8 +1,8 @@
-package com.fgitness.activitysetvice.controller;
+package com.fitness.activitysetvice.controller;
 
-import com.fgitness.activitysetvice.dto.ActivityRequest;
-import com.fgitness.activitysetvice.dto.ActivityResponse;
-import com.fgitness.activitysetvice.service.ActivityService;
+import com.fitness.activitysetvice.dto.ActivityRequest;
+import com.fitness.activitysetvice.dto.ActivityResponse;
+import com.fitness.activitysetvice.service.ActivityService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

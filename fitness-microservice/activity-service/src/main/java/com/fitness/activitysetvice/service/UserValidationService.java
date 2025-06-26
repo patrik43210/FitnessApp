@@ -1,4 +1,4 @@
-package com.fgitness.activitysetvice.service;
+package com.fitness.activitysetvice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

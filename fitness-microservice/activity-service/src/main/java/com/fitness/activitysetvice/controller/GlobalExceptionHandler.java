@@ -1,6 +1,6 @@
-package com.fgitness.activitysetvice.controller;
+package com.fitness.activitysetvice.controller;
 
-import com.fgitness.activitysetvice.exception.UserNotFoundException;
+import com.fitness.activitysetvice.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

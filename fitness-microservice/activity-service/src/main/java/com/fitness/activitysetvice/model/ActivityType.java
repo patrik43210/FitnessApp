@@ -1,4 +1,4 @@
-package com.fgitness.activitysetvice.model;
+package com.fitness.activitysetvice.model;
 
 public enum ActivityType {
     RUNNING,

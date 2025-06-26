@@ -1,4 +1,4 @@
-package com.fgitness.activitysetvice.service;
+package com.fitness.activitysetvice.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

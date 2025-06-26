@@ -1,4 +1,4 @@
-package com.fgitness.activitysetvice.model;
+package com.fitness.activitysetvice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

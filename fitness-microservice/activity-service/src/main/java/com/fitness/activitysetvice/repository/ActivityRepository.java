@@ -1,6 +1,6 @@
-package com.fgitness.activitysetvice.repository;
+package com.fitness.activitysetvice.repository;
 
-import com.fgitness.activitysetvice.model.Activity;
+import com.fitness.activitysetvice.model.Activity;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

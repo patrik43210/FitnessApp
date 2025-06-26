@@ -1,4 +1,4 @@
-package com.fgitness.activitysetvice.configuration;
+package com.fitness.activitysetvice.configuration;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;

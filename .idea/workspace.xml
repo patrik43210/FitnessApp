@@ -5,10 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="890a2934-3d7e-4e76-aed8-725112a0f869" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/java/com/fitness/aiservice/config/RabbitMqConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/java/com/fitness/aiservice/model/Activity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/java/com/fitness/aiservice/service/ActivityMessageListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/RabbitMqConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/ActivitysetviceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/ActivitysetviceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/MongoConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/configuration/MongoConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/configuration/RabbitMqConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/WebClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/configuration/WebClientConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/controller/ActivityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/controller/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/controller/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/dto/ActivityRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/dto/ActivityRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/dto/ActivityResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/dto/ActivityResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/exception/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/exception/UserNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/model/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/model/Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/model/ActivityType.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/model/ActivityType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/repository/ActivityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/repository/ActivityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/service/ActivityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/service/UserValidationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fitness/activitysetvice/service/UserValidationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fgitness/activitysetvice/ActivitysetviceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fitness/activitysetvice/ActivitysetviceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fgitness/activitysetvice/service/ActivityServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fitness/activitysetvice/service/ActivityServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fgitness/activitysetvice/service/UserValidationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fitness/activitysetvice/service/UserValidationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitness-microservice/ai-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +73,7 @@
     "last_opened_file_path": "C:/Users/patri/OneDrive/Desktop/Coach G/FitnessApp/fitness-microservice/activity-service/pom.xml",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors"
   }
 }]]></component>
@@ -65,16 +85,18 @@
       <recent name="com.fgitness.activitysetvice.model" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.fitness.aiservice.model" />
+      <recent name="com.fitness.aiservice.config" />
       <recent name="com.fitness.aiservice" />
     </key>
   </component>
-  <component name="RunManager" selected="Compound.fitness-services">
+  <component name="RunManager" selected="Application.AiserviceApplication">
     <configuration name="ActivitysetviceApplication" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.fgitness.activitysetvice.ActivitysetviceApplication" />
+      <option name="MAIN_CLASS_NAME" value="com.fitness.activitysetvice.ActivitysetviceApplication" />
       <module name="activitysetvice" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.fgitness.activitysetvice.*" />
+          <option name="PATTERN" value="com.fitness.activitysetvice.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -130,7 +152,6 @@
     <configuration name="fitness-services" type="CompoundRunConfigurationType">
       <toRun name="ActivitysetviceApplication" type="Application" />
       <toRun name="AiserviceApplication" type="Application" />
-      <toRun name="ConfigServerApplication" type="Application" />
       <toRun name="EurekaApplication" type="Application" />
       <toRun name="UserserviceApplication" type="Application" />
       <method v="2" />
@@ -192,10 +213,10 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.ActivitysetviceApplication" />
       <item itemvalue="Application.UserserviceApplication" />
       <item itemvalue="Application.EurekaApplication" />
       <item itemvalue="Application.AiserviceApplication" />
+      <item itemvalue="Application.ActivitysetviceApplication" />
       <item itemvalue="Compound.UnitTests" />
       <item itemvalue="Compound.fitness-services" />
       <item itemvalue="JUnit.ActivityServiceTest" />

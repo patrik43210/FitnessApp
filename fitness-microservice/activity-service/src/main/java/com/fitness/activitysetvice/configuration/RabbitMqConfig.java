@@ -1,4 +1,4 @@
-package com.fgitness.activitysetvice.configuration;
+package com.fitness.activitysetvice.configuration;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

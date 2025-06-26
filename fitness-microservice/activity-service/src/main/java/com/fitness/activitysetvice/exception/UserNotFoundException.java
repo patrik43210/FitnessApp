@@ -1,4 +1,4 @@
-package com.fgitness.activitysetvice.exception;
+package com.fitness.activitysetvice.exception;
 
 public class UserNotFoundException extends RuntimeException {
     public UserNotFoundException(String userId) {

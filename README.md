@@ -6,8 +6,12 @@ docker run -d --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=patrik
 or
 docker run -d --name mongodb -p 27017:27017 mongo:latest
 
-# latest RabbitMQ 4.x --- guest guest
+# latest RabbitMQ 4.x -deletable -- guest guest
 docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4-management
+
+or
+# latest RabbitMQ 4.x --- guest guest
+docker run -it --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4-management
 
 # ACCESS LINKS
 

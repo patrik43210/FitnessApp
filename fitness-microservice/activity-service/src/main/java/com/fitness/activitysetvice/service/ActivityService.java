@@ -1,14 +1,12 @@
-package com.fgitness.activitysetvice.service;
+package com.fitness.activitysetvice.service;
 
-import com.fgitness.activitysetvice.dto.ActivityRequest;
-import com.fgitness.activitysetvice.dto.ActivityResponse;
-import com.fgitness.activitysetvice.exception.UserNotFoundException;
-import com.fgitness.activitysetvice.model.Activity;
-import com.fgitness.activitysetvice.repository.ActivityRepository;
+import com.fitness.activitysetvice.dto.ActivityRequest;
+import com.fitness.activitysetvice.dto.ActivityResponse;
+import com.fitness.activitysetvice.exception.UserNotFoundException;
+import com.fitness.activitysetvice.model.Activity;
+import com.fitness.activitysetvice.repository.ActivityRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
