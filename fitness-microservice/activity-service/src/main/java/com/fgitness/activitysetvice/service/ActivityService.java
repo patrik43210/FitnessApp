@@ -6,8 +6,11 @@ import com.fgitness.activitysetvice.exception.UserNotFoundException;
 import com.fgitness.activitysetvice.model.Activity;
 import com.fgitness.activitysetvice.repository.ActivityRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +18,18 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ActivityService {
 
-    Logger log = LoggerFactory.getLogger(ActivityService.class);
-
     private final ActivityRepository activityRepository;
-
+    private final RabbitTemplate rabbitTemplate;
     private final UserValidationService userValidationService;
+
+    @Value("${rabbitmq.exchange.name}")
+    private String exchange;
+
+    @Value("${rabbitmq.routing.Key}")
+    private String routingKey;
 
     public ActivityResponse trackActivity(ActivityRequest request) {
         log.info("Track activity : {}", request);
@@ -43,6 +51,14 @@ public class ActivityService {
 
         Activity savedActivity = activityRepository.save(activity);
         log.info("Saved activity : {}", savedActivity);
+
+        //Publish to RabbitMQ for AI processing
+        try{
+            rabbitTemplate.convertAndSend(exchange, routingKey, savedActivity);
+        }catch (Exception e){
+            log.error("Failed to publish to RabbitMq : ", e);
+        }
+
         return mapToResponse(savedActivity);
     }
     private ActivityResponse mapToResponse(Activity activity){
