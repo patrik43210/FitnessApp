@@ -5,54 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="890a2934-3d7e-4e76-aed8-725112a0f869" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_googlecode_javaewah_JavaEWAH_1_2_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_i2p_crypto_eddsa_0_3_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_14.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_sshd_sshd_osgi_2_14_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_sshd_sshd_sftp_2_14_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jgit_org_eclipse_jgit_6_10_1_202505221210_r.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jgit_org_eclipse_jgit_http_apache_6_10_1_202505221210_r.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_jgit_org_eclipse_jgit_ssh_apache_6_10_1_202505221210_r.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_jcl_over_slf4j_2_0_17.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_config_client_4_3_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_config_server_4_3_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_config_4_3_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/java/com/fitness/aiservice/controller/RecommendationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/java/com/fitness/aiservice/repository/RecommendationRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/java/com/fitness/aiservice/service/RecommendationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_reactivestreams_5_5_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_mongodb_reactive_3_5_3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/ActivitysetviceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/ActivitysetviceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/configuration/MongoConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/MongoConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/configuration/WebClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/WebClientConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/controller/ActivityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/controller/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/controller/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/dto/ActivityRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/dto/ActivityRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/dto/ActivityResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/dto/ActivityResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/exception/UserNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/exception/UserNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/model/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/model/Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/model/ActivityType.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/model/ActivityType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/repository/ActivityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/repository/ActivityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/service/ActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/java/com/fgitness/activitysetvice/service/UserValidationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/service/UserValidationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/test/java/com/fgitness/activitysetvice/ActivitysetviceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fgitness/activitysetvice/ActivitysetviceApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/test/java/com/fgitness/activitysetvice/service/ActivityServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fgitness/activitysetvice/service/ActivityServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-setvice/src/test/java/com/fgitness/activitysetvice/service/UserValidationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fgitness/activitysetvice/service/UserValidationServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fitness-microservice/ai-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/eureka/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/eureka/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/eureka/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/eureka/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/user-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/user-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,7 +139,7 @@
       <module name="activitysetvice" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.fgitness.activitysetvice.service.*" />
+          <option name="PATTERN" value="com.fitness.aiservice.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -221,7 +180,7 @@
       <module name="activitysetvice" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.fgitness.activitysetvice.service.*" />
+          <option name="PATTERN" value="com.fitness.aiservice.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
