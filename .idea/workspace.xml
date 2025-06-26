@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="890a2934-3d7e-4e76-aed8-725112a0f869" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/configuration/RabbitMqConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/main/java/com/fgitness/activitysetvice/service/ActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fgitness/activitysetvice/service/ActivityServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/activity-service/src/test/java/com/fgitness/activitysetvice/service/ActivityServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +50,10 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/patri/OneDrive/Desktop/Coach G/fitness-config-repo",
+    "last_opened_file_path": "C:/Users/patri/OneDrive/Desktop/Coach G/FitnessApp/fitness-microservice/activity-service/pom.xml",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "reference.projectsettings.compiler.annotationProcessors"
   }
 }]]></component>
