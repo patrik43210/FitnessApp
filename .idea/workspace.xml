@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="890a2934-3d7e-4e76-aed8-725112a0f869" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/java/com/fitness/aiservice/controller/RecommendationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/java/com/fitness/aiservice/repository/RecommendationRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/src/main/java/com/fitness/aiservice/service/RecommendationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mongodb_mongodb_driver_reactivestreams_5_5_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_mongodb_reactive_3_5_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fitness-microservice/ai-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fitness-microservice/ai-service/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="890a2934-3d7e-4e76-aed8-725112a0f869" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
