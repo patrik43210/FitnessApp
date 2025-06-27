@@ -22,3 +22,8 @@ build/
 # OS junk
 .DS_Store
 Thumbs.db
+
+#IntelliJ IDEA
+.idea/
+.idea_modules/
+.idea_workspace.xml
