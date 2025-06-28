@@ -2,6 +2,7 @@ package com.fitness.aiservice.service;
 
 import com.google.genai.Client;
 import com.google.genai.types.GenerateContentResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -9,6 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class GeminiService {
 
     @Value("${gemini.api.url}")
@@ -16,26 +18,23 @@ public class GeminiService {
 
     @Value("${gemini.api.key}")
     private String geminiApiKey;
-    //TODO cannot find values from config
 
-    private final WebClient webClient;
-
-    public GeminiService(WebClient.Builder webClient){
-        this.webClient = WebClient.builder().build();
-    }
+    private final WebClient.Builder webClientBuilder;
 
     /**
-     * This method uses WebClient ensure u have GEMINI_API_KEY and GEMINI_API_URl in the config file
-     * */
-    public String geminiAnswerRest(String prompt){
+     * This method uses WebClient to call Gemini REST endpoint.
+     */
+    public String geminiAnswerRest(String prompt) {
         Map<String, Object> requestBody = Map.of("contents", new Object[]{
                 Map.of("parts", new Object[]{
                         Map.of("text", prompt)}
                 )}
         );
 
+        WebClient webClient = webClientBuilder.build();
+
         String response = webClient.post()
-                .uri("geminiApiUrl" + "?key=" + "geminiApiKey")
+                .uri(geminiApiUrl + "?key=" + geminiApiKey)
                 .header("Content-Type", "application/json")
                 .bodyValue(requestBody)
                 .retrieve()
@@ -45,22 +44,18 @@ public class GeminiService {
         return response;
     }
 
-
     /**
-     * This method uses google-genai ensure u have GEMINI_API_KEY as environment variable
-     * */
-    public String geminiAnswerLib(String prompt){
+     * This method uses Google GenAI Java client.
+     */
+    public String geminiAnswerLib(String prompt) {
+        Client client = new Client(); // Will read GEMINI_API_KEY from env var.
 
-        // The client gets the API key from the environment variable `GEMINI_API_KEY`.
-        Client client = new Client();
-
-        GenerateContentResponse response =
-                client.models.generateContent(
-                        "gemini-2.5-flash",
-                        prompt,
-                        null);
+        GenerateContentResponse response = client.models.generateContent(
+                "gemini-2.5-flash",
+                prompt,
+                null
+        );
 
         return response.text();
     }
-
 }

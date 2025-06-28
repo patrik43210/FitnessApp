@@ -13,6 +13,9 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class ActivityMessageListener {
 
+    private final String METHOD_REST = "METHOD_REST";
+    private final String METHOD_LIB = "METHOD_LIB";
+
     private final ActivityAIService aiService;
 
     @RabbitListener(queues = "activity.queue")
@@ -22,8 +25,6 @@ public class ActivityMessageListener {
     }
 
     public String getRandomMethod() {
-        String METHOD_REST = "METHOD_REST";
-        String METHOD_LIB = "METHOD_LIB";
         return new Random().nextBoolean() ? METHOD_REST : METHOD_LIB;
     }
 }
