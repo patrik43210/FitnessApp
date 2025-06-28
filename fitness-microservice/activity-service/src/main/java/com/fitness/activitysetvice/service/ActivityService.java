@@ -14,6 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.fitness.activitysetvice.constant.ActivityServiceConstants.LOG_TRACK_ACTIVITY;
+import static com.fitness.activitysetvice.constant.ActivityServiceConstants.LOG_SAVED_ACTIVITY;
+import static com.fitness.activitysetvice.constant.ActivityServiceConstants.LOG_RABBITMQ_FAIL;
+import static com.fitness.activitysetvice.constant.ActivityServiceConstants.ACTIVITY_NOT_FOUND;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -30,7 +35,7 @@ public class ActivityService {
     private String routingKey;
 
     public ActivityResponse trackActivity(ActivityRequest request) {
-        log.info("Track activity : {}", request);
+        log.info(LOG_TRACK_ACTIVITY, request);
 
         boolean isValidUser = userValidationService.validateUser(request.getUserId());
 
@@ -48,18 +53,19 @@ public class ActivityService {
                 .build();
 
         Activity savedActivity = activityRepository.save(activity);
-        log.info("Saved activity : {}", savedActivity);
+        log.info(LOG_SAVED_ACTIVITY, savedActivity);
 
-        //Publish to RabbitMQ for AI processing
-        try{
+        // Publish to RabbitMQ for AI processing
+        try {
             rabbitTemplate.convertAndSend(exchange, routingKey, savedActivity);
-        }catch (Exception e){
-            log.error("Failed to publish to RabbitMq : ", e);
+        } catch (Exception e) {
+            log.error(LOG_RABBITMQ_FAIL, e);
         }
 
         return mapToResponse(savedActivity);
     }
-    private ActivityResponse mapToResponse(Activity activity){
+
+    private ActivityResponse mapToResponse(Activity activity) {
         ActivityResponse activityResponse = new ActivityResponse();
         activityResponse.setId(activity.getId());
         activityResponse.setUserId(activity.getUserId());
@@ -75,20 +81,19 @@ public class ActivityService {
     }
 
     public List<ActivityResponse> getAllActivities() {
-        return activityRepository.findAll().stream().map(this::mapToResponse).collect(Collectors.toList());
+        return activityRepository.findAll().stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
     }
 
     public List<ActivityResponse> getUserActivities(String userId) {
-
         List<Activity> userActivities = activityRepository.findByUserId(userId);
-
         return userActivities.stream().map(this::mapToResponse).collect(Collectors.toList());
-
     }
 
     public ActivityResponse getActivity(String activityId) {
         return activityRepository.findById(activityId)
                 .map(this::mapToResponse)
-                .orElseThrow(()->new RuntimeException("Activity not found with id : " + activityId));
+                .orElseThrow(() -> new RuntimeException(ACTIVITY_NOT_FOUND + activityId));
     }
 }

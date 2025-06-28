@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.fitness.aiservice.constant.AIServiceConstants.ERROR_NO_RECOMMENDATION_FOUND;
+
 @Service
 @RequiredArgsConstructor
 public class RecommendationService {
@@ -18,7 +20,7 @@ public class RecommendationService {
     }
 
     public Recommendation getActivityRecommendation(String activityId) {
-        return  recommendationRepository.findByActivityId(activityId)
-                .orElseThrow(() -> new RuntimeException("No Recommendation Found for this activity: " + activityId));
+        return recommendationRepository.findByActivityId(activityId)
+                .orElseThrow(() -> new RuntimeException(ERROR_NO_RECOMMENDATION_FOUND + activityId));
     }
 }

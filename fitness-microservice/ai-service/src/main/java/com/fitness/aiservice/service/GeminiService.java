@@ -9,6 +9,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Map;
 
+import static com.fitness.aiservice.constant.AIServiceConstants.GEMINI_MODEL;
+
 @Service
 @RequiredArgsConstructor
 public class GeminiService {
@@ -21,9 +23,6 @@ public class GeminiService {
 
     private final WebClient.Builder webClientBuilder;
 
-    /**
-     * This method uses WebClient to call Gemini REST endpoint.
-     */
     public String geminiAnswerRest(String prompt) {
         Map<String, Object> requestBody = Map.of("contents", new Object[]{
                 Map.of("parts", new Object[]{
@@ -33,29 +32,23 @@ public class GeminiService {
 
         WebClient webClient = webClientBuilder.build();
 
-        String response = webClient.post()
+        return webClient.post()
                 .uri(geminiApiUrl + "?key=" + geminiApiKey)
                 .header("Content-Type", "application/json")
                 .bodyValue(requestBody)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
-
-        return response;
     }
 
-    /**
-     * This method uses Google GenAI Java client.
-     */
     public String geminiAnswerLib(String prompt) {
         Client client = new Client(); // Will read GEMINI_API_KEY from env var.
 
         GenerateContentResponse response = client.models.generateContent(
-                "gemini-2.5-flash",
+                GEMINI_MODEL,
                 prompt,
                 null
         );
-
         return response.text();
     }
 }

@@ -10,20 +10,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.Random;
 
+import static com.fitness.aiservice.constant.AIServiceConstants.LOG_RECEIVED_ACTIVITY;
+import static com.fitness.aiservice.constant.AIServiceConstants.METHOD_REST;
+import static com.fitness.aiservice.constant.AIServiceConstants.METHOD_LIB;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class ActivityMessageListener {
 
-    private final String METHOD_REST = "METHOD_REST";
-    private final String METHOD_LIB = "METHOD_LIB";
-
     private final ActivityAIService aiService;
     private final RecommendationRepository recommendationRepository;
 
     @RabbitListener(queues = "activity.queue")
-    public void processActivity(Activity activity){
-        log.info("Received activity for processing: {}", activity.getId());
+    public void processActivity(Activity activity) {
+        log.info(LOG_RECEIVED_ACTIVITY, activity.getId());
         Recommendation recommendation = aiService.generateRecommendation(activity, getRandomMethod());
         recommendationRepository.save(recommendation);
     }

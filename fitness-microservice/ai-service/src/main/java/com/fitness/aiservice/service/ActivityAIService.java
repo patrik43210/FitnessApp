@@ -13,33 +13,37 @@ import static com.fitness.aiservice.helper.RecommendationHelper.cleanJsonContent
 import static com.fitness.aiservice.helper.RecommendationHelper.buildRecommendation;
 import static com.fitness.aiservice.helper.RecommendationHelper.createDefaultRecommendation;
 
+import static com.fitness.aiservice.constant.AIServiceConstants.LOG_GENERATE_RECOMMENDATION;
+import static com.fitness.aiservice.constant.AIServiceConstants.METHOD_REST;
+import static com.fitness.aiservice.constant.AIServiceConstants.LOG_AI_RESPONSE_RECEIVED;
+import static com.fitness.aiservice.constant.AIServiceConstants.ERROR_UNKNOWN_METHOD;
+import static com.fitness.aiservice.constant.AIServiceConstants.LOG_AI_RESPONSE_PROCESSED;
+import static com.fitness.aiservice.constant.AIServiceConstants.LOG_AI_RESPONSE_ERROR;
+import static com.fitness.aiservice.constant.AIServiceConstants.METHOD_LIB;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class ActivityAIService {
 
-    private static final String METHOD_REST = "METHOD_REST";
-    private static final String METHOD_LIB = "METHOD_LIB";
-
     private final GeminiService geminiService;
 
     public Recommendation generateRecommendation(Activity activity, String method) {
-        log.info("Generate Recommendation using method: {}",
-                METHOD_REST.equals(method) ? "WebClient" : "Gemini Java Library");
+        log.info(LOG_GENERATE_RECOMMENDATION, method.equals(METHOD_REST) ? "WebClient" : "Gemini Java Library");
 
         String prompt = createPromptForActivity(activity);
         String aiResponse;
 
         if (METHOD_REST.equals(method)) {
             aiResponse = geminiService.geminiAnswerRest(prompt);
-            log.info("Response from AI completed");
-           return processAiResponse(activity, aiResponse, method);
+            log.info(LOG_AI_RESPONSE_RECEIVED);
+            return processAiResponse(activity, aiResponse, method);
         } else if (METHOD_LIB.equals(method)) {
             aiResponse = geminiService.geminiAnswerLib(prompt);
-            log.info("Response from AI completed");
-           return processAiResponse(activity, aiResponse, method);
+            log.info(LOG_AI_RESPONSE_RECEIVED);
+            return processAiResponse(activity, aiResponse, method);
         } else {
-            throw new IllegalArgumentException("Unknown method: " + method);
+            throw new IllegalArgumentException(ERROR_UNKNOWN_METHOD + method);
         }
     }
 
@@ -49,19 +53,15 @@ public class ActivityAIService {
             ObjectMapper mapper = new ObjectMapper();
             if (METHOD_REST.equals(method)) {
                 JsonNode rootNode = mapper.readTree(aiResponse);
-                JsonNode textNode = rootNode.path("candidates")
-                        .get(0)
-                        .path("content")
-                        .path("parts")
-                        .get(0)
-                        .get("text");
+                JsonNode textNode = rootNode.path("candidates").get(0)
+                        .path("content").path("parts").get(0).get("text");
 
                 jsonContent = cleanJsonContent(textNode.asText());
             } else {
                 jsonContent = cleanJsonContent(aiResponse);
             }
 
-            log.info("AI response Processed");
+            log.info(LOG_AI_RESPONSE_PROCESSED);
 
             JsonNode analysisJson = mapper.readTree(jsonContent);
             JsonNode analysisNode = analysisJson.path("analysis");
@@ -69,9 +69,8 @@ public class ActivityAIService {
             return buildRecommendation(activity, analysisJson, analysisNode);
 
         } catch (Exception e) {
-            log.error("Error processing AI response", e);
+            log.error(LOG_AI_RESPONSE_ERROR, e);
             return createDefaultRecommendation(activity);
         }
     }
 }
-
