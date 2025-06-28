@@ -3,9 +3,15 @@ package com.fitness.aiservice.service;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fitness.aiservice.model.Activity;
+import com.fitness.aiservice.model.Recommendation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import static com.fitness.aiservice.helper.RecommendationHelper.createPromptForActivity;
+import static com.fitness.aiservice.helper.RecommendationHelper.cleanJsonContent;
+import static com.fitness.aiservice.helper.RecommendationHelper.buildRecommendation;
+import static com.fitness.aiservice.helper.RecommendationHelper.createDefaultRecommendation;
 
 @Service
 @Slf4j
@@ -17,7 +23,7 @@ public class ActivityAIService {
 
     private final GeminiService geminiService;
 
-    public String generateRecommendation(Activity activity, String method) {
+    public Recommendation generateRecommendation(Activity activity, String method) {
         log.info("Generate Recommendation using method: {}",
                 METHOD_REST.equals(method) ? "WebClient" : "Gemini Java Library");
 
@@ -26,23 +32,22 @@ public class ActivityAIService {
 
         if (METHOD_REST.equals(method)) {
             aiResponse = geminiService.geminiAnswerRest(prompt);
-            processAiResponse(activity, aiResponse, method);
+            log.info("Response from AI completed");
+           return processAiResponse(activity, aiResponse, method);
         } else if (METHOD_LIB.equals(method)) {
             aiResponse = geminiService.geminiAnswerLib(prompt);
-            processAiResponse(activity, aiResponse, method);
+            log.info("Response from AI completed");
+           return processAiResponse(activity, aiResponse, method);
         } else {
             throw new IllegalArgumentException("Unknown method: " + method);
         }
-
-        log.info("Response from AI: {}", aiResponse);
-        return aiResponse;
     }
 
-    private void processAiResponse(Activity activity, String aiResponse, String method) {
+    private Recommendation processAiResponse(Activity activity, String aiResponse, String method) {
         try {
             String jsonContent;
+            ObjectMapper mapper = new ObjectMapper();
             if (METHOD_REST.equals(method)) {
-                ObjectMapper mapper = new ObjectMapper();
                 JsonNode rootNode = mapper.readTree(aiResponse);
                 JsonNode textNode = rootNode.path("candidates")
                         .get(0)
@@ -56,62 +61,17 @@ public class ActivityAIService {
                 jsonContent = cleanJsonContent(aiResponse);
             }
 
-            log.info("Processed AI response: {}", jsonContent);
+            log.info("AI response Processed");
+
+            JsonNode analysisJson = mapper.readTree(jsonContent);
+            JsonNode analysisNode = analysisJson.path("analysis");
+
+            return buildRecommendation(activity, analysisJson, analysisNode);
 
         } catch (Exception e) {
             log.error("Error processing AI response", e);
+            return createDefaultRecommendation(activity);
         }
-    }
-
-    private static String cleanJsonContent(String textNode) {
-        return textNode
-                .replaceAll("```json\\n", "")
-                .replaceAll("\\n```", "")
-                .trim();
-    }
-
-    private String createPromptForActivity(Activity activity) {
-        return String.format("""
-                Analyse this fitness activity and provide a detailed recommendation in the following EXACT JSON format:
-
-                {
-                  "analysis": {
-                    "overall": "Overall analysis here",
-                    "pace": "Pace analysis here",
-                    "heartRate": "Heart rate analysis here",
-                    "caloriesBurned": "Calories analysis here"
-                  },
-                  "improvements": [
-                    {
-                      "area": "Area name",
-                      "recommendation": "Detailed recommendation"
-                    }
-                  ],
-                  "suggestions": [
-                    {
-                      "workout": "Workout name",
-                      "description": "Detailed workout description"
-                    }
-                  ],
-                  "safety": [
-                    "Safety point 1",
-                    "Safety point 2"
-                  ]
-                }
-
-                Analyze this activity:
-                - Activity Type: %s
-                - Duration: %d minutes
-                - Calories Burned: %d
-                - Additional Metrics: %s
-
-                Provide a detailed analysis focusing on performance, improvements, next workout suggestions, and safety guidelines.
-                Ensure the response strictly follows the EXACT JSON format shown above.
-                """,
-                activity.getType(),
-                activity.getDuration(),
-                activity.getCaloriesBurned(),
-                activity.getAdditionalMetrics());
     }
 }
 
