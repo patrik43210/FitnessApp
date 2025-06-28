@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/fitness-microservice/activity-service/activitysetvice.iml" filepath="$PROJECT_DIR$/fitness-microservice/activity-service/activitysetvice.iml" />
       <module fileurl="file://$PROJECT_DIR$/fitness-microservice/ai-service/aiservice.iml" filepath="$PROJECT_DIR$/fitness-microservice/ai-service/aiservice.iml" />
       <module fileurl="file://$PROJECT_DIR$/fitness-microservice/eureka/eureka.iml" filepath="$PROJECT_DIR$/fitness-microservice/eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fitness-microservice/gateway/gateway.iml" filepath="$PROJECT_DIR$/fitness-microservice/gateway/gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/fitness-microservice/user-service/userservice.iml" filepath="$PROJECT_DIR$/fitness-microservice/user-service/userservice.iml" />
     </modules>
   </component>

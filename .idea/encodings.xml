@@ -9,6 +9,8 @@
     <file url="file://$PROJECT_DIR$/fitness-microservice/config-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/fitness-microservice/eureka/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/fitness-microservice/eureka/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/fitness-microservice/gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/fitness-microservice/gateway/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/fitness-microservice/user-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/fitness-microservice/user-service/src/main/resources" charset="UTF-8" />
   </component>
