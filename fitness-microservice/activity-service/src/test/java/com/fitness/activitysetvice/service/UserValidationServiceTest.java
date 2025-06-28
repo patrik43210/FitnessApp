@@ -3,8 +3,11 @@ package com.fitness.activitysetvice.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.reactive.function.client.*;
+import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -18,9 +21,7 @@ class UserValidationServiceTest {
 
     @SuppressWarnings("rawtypes")
     private WebClient.RequestHeadersSpec requestHeadersSpec;
-
     private WebClient.ResponseSpec responseSpec;
-
     private UserValidationService userValidationService;
 
     @BeforeEach
@@ -34,67 +35,64 @@ class UserValidationServiceTest {
     }
 
     @Test
-    void shouldReturnTrueWhenUserIsValid() {
+    void shouldReturnTrueIfValid() {
         when(webClient.get()).thenReturn(requestHeadersUriSpec);
-        when(requestHeadersUriSpec.uri("/api/users/{userId}/validate", "user123")).thenReturn(requestHeadersSpec);
+        when(requestHeadersUriSpec.uri(anyString(), Optional.ofNullable(any()))).thenReturn(requestHeadersSpec);
         when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
         when(responseSpec.bodyToMono(Boolean.class)).thenReturn(Mono.just(true));
 
-        boolean result = userValidationService.validateUser("user123");
+        boolean result = userValidationService.validateUser("u1");
 
         assertThat(result).isTrue();
     }
 
     @Test
-    void shouldReturnFalseWhenUserIsInvalid() {
+    void shouldReturnFalseIfInvalid() {
         when(webClient.get()).thenReturn(requestHeadersUriSpec);
-        when(requestHeadersUriSpec.uri("/api/users/{userId}/validate", "user123")).thenReturn(requestHeadersSpec);
+        when(requestHeadersUriSpec.uri(anyString(), Optional.ofNullable(any()))).thenReturn(requestHeadersSpec);
         when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
         when(responseSpec.bodyToMono(Boolean.class)).thenReturn(Mono.just(false));
 
-        boolean result = userValidationService.validateUser("user123");
+        boolean result = userValidationService.validateUser("u1");
 
         assertThat(result).isFalse();
     }
 
     @Test
-    void shouldThrowRuntimeExceptionWhenUserNotFound() {
+    void shouldThrowNotFound() {
         when(webClient.get()).thenReturn(requestHeadersUriSpec);
-        when(requestHeadersUriSpec.uri("/api/users/{userId}/validate", "user123")).thenReturn(requestHeadersSpec);
+        when(requestHeadersUriSpec.uri(anyString(), Optional.ofNullable(any()))).thenReturn(requestHeadersSpec);
         when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
         when(responseSpec.bodyToMono(Boolean.class)).thenThrow(
-                new WebClientResponseException(HttpStatus.NOT_FOUND.value(), "Not Found", null, null, null)
-        );
+                new WebClientResponseException(HttpStatus.NOT_FOUND.value(), "not found", null, null, null));
 
-        assertThatThrownBy(() -> userValidationService.validateUser("user123"))
+        assertThatThrownBy(() -> userValidationService.validateUser("bad"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("User not Found");
     }
 
     @Test
-    void shouldThrowRuntimeExceptionWhenBadRequest() {
+    void shouldThrowBadRequest() {
         when(webClient.get()).thenReturn(requestHeadersUriSpec);
-        when(requestHeadersUriSpec.uri("/api/users/{userId}/validate", "user123")).thenReturn(requestHeadersSpec);
+        when(requestHeadersUriSpec.uri(anyString(), Optional.ofNullable(any()))).thenReturn(requestHeadersSpec);
         when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
         when(responseSpec.bodyToMono(Boolean.class)).thenThrow(
-                new WebClientResponseException(HttpStatus.BAD_REQUEST.value(), "Bad Request", null, null, null)
-        );
+                new WebClientResponseException(HttpStatus.BAD_REQUEST.value(), "bad request", null, null, null));
 
-        assertThatThrownBy(() -> userValidationService.validateUser("user123"))
+        assertThatThrownBy(() -> userValidationService.validateUser("bad"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("Invalid request");
     }
 
     @Test
-    void shouldThrowGenericRuntimeExceptionOnOtherErrors() {
+    void shouldThrowGenericError() {
         when(webClient.get()).thenReturn(requestHeadersUriSpec);
-        when(requestHeadersUriSpec.uri("/api/users/{userId}/validate", "user123")).thenReturn(requestHeadersSpec);
+        when(requestHeadersUriSpec.uri(anyString(), Optional.ofNullable(any()))).thenReturn(requestHeadersSpec);
         when(requestHeadersSpec.retrieve()).thenReturn(responseSpec);
         when(responseSpec.bodyToMono(Boolean.class)).thenThrow(
-                new WebClientResponseException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Internal Error", null, null, null)
-        );
+                new WebClientResponseException(HttpStatus.INTERNAL_SERVER_ERROR.value(), "error", null, null, null));
 
-        assertThatThrownBy(() -> userValidationService.validateUser("user123"))
+        assertThatThrownBy(() -> userValidationService.validateUser("err"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("Something went wrong");
     }

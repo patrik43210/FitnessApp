@@ -8,7 +8,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -26,21 +27,26 @@ class UserServiceTest {
 
     @Test
     void shouldReturnUserProfile_whenUserExists() {
-        User mockUser = getMockUser();
-        when(userRepository.findById("user123")).thenReturn(Optional.of(mockUser));
+        User user = getMockUser();
+        when(userRepository.findById("user123")).thenReturn(Optional.of(user));
 
         UserResponse response = userService.getUserProfile("user123");
 
         assertThat(response).isNotNull();
+        assertThat(response.getId()).isEqualTo("user123");
         assertThat(response.getEmail()).isEqualTo("john@example.com");
+        assertThat(response.getFirstName()).isEqualTo("John");
+        assertThat(response.getLastName()).isEqualTo("Doe");
+        assertThat(response.getPassword()).isEqualTo("pass123");
+
         verify(userRepository).findById("user123");
     }
 
     @Test
     void shouldThrowException_whenUserNotFound() {
-        when(userRepository.findById("user123")).thenReturn(Optional.empty());
+        when(userRepository.findById("unknown")).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> userService.getUserProfile("user123"))
+        assertThatThrownBy(() -> userService.getUserProfile("unknown"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("User not found");
     }
@@ -48,15 +54,21 @@ class UserServiceTest {
     @Test
     void shouldRegisterNewUser_whenEmailIsUnique() {
         RegisterRequest request = new RegisterRequest();
-        request.setEmail("john@example.com");
-        request.setPassword("pass123");
-        request.setFirstName("John");
-        request.setLastName("Doe");
+        request.setEmail("new@example.com");
+        request.setPassword("secure123");
+        request.setFirstName("Alice");
+        request.setLastName("Wonderland");
 
-        when(userRepository.existsByEmail("john@example.com")).thenReturn(false);
+        when(userRepository.existsByEmail("new@example.com")).thenReturn(false);
 
-        User savedUser = getMockUser();
-        when(userRepository.save(any(User.class))).thenReturn(savedUser);
+        User userToSave = new User();
+        userToSave.setEmail(request.getEmail());
+        userToSave.setPassword(request.getPassword());
+        userToSave.setFirstName(request.getFirstName());
+        userToSave.setLastName(request.getLastName());
+
+        User saved = getMockUser();
+        when(userRepository.save(any(User.class))).thenReturn(saved);
 
         UserResponse response = userService.register(request);
 
@@ -83,36 +95,41 @@ class UserServiceTest {
 
     @Test
     void shouldReturnAllUsers() {
-        User user1 = getMockUser();
-        User user2 = new User();
-        user2.setId("2");
-        user2.setEmail("jane@example.com");
-        user2.setPassword("pass456");
-        user2.setFirstName("Jane");
-        user2.setLastName("Smith");
+        User u1 = getMockUser();
+        User u2 = new User();
+        u2.setId("u2");
+        u2.setEmail("second@example.com");
+        u2.setPassword("pwd");
+        u2.setFirstName("Second");
+        u2.setLastName("User");
 
-        List<User> mockUsers = List.of(user1, user2);
-
-        when(userRepository.findAll()).thenReturn(mockUsers);
+        when(userRepository.findAll()).thenReturn(List.of(u1, u2));
 
         List<UserResponse> responses = userService.getAllUser();
 
         assertThat(responses).hasSize(2);
-        assertThat(responses.get(1).getEmail()).isEqualTo("jane@example.com");
+        assertThat(responses.get(0).getId()).isEqualTo("user123");
+        assertThat(responses.get(1).getEmail()).isEqualTo("second@example.com");
     }
 
     @Test
-    void shouldReturnTrueIfUserExistsById() {
+    void shouldReturnTrueWhenUserIdExists() {
         when(userRepository.existsById("user123")).thenReturn(true);
 
-        assertThat(userService.existByUserId("user123")).isTrue();
+        boolean exists = userService.existByUserId("user123");
+
+        assertThat(exists).isTrue();
+        verify(userRepository).existsById("user123");
     }
 
     @Test
-    void shouldReturnFalseIfUserDoesNotExistById() {
+    void shouldReturnFalseWhenUserIdDoesNotExist() {
         when(userRepository.existsById("user123")).thenReturn(false);
 
-        assertThat(userService.existByUserId("user123")).isFalse();
+        boolean exists = userService.existByUserId("user123");
+
+        assertThat(exists).isFalse();
+        verify(userRepository).existsById("user123");
     }
 
     private User getMockUser() {

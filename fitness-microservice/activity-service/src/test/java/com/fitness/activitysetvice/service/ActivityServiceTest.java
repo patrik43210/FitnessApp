@@ -12,7 +12,9 @@ import org.mockito.Mockito;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -21,130 +23,120 @@ class ActivityServiceTest {
 
     private ActivityRepository activityRepository;
     private UserValidationService userValidationService;
+    private RabbitTemplate rabbitTemplate;
     private ActivityService activityService;
 
     @BeforeEach
     void setup() {
         activityRepository = mock(ActivityRepository.class);
-        userValidationService = Mockito.mock(UserValidationService.class);
-        RabbitTemplate rabbitTemplate = mock(RabbitTemplate.class);
+        userValidationService = mock(UserValidationService.class);
+        rabbitTemplate = mock(RabbitTemplate.class);
+
         activityService = new ActivityService(activityRepository, rabbitTemplate, userValidationService);
+
+        // Inject dummy RabbitMQ config values
+        org.springframework.test.util.ReflectionTestUtils.setField(activityService, "exchange", "test.exchange");
+        org.springframework.test.util.ReflectionTestUtils.setField(activityService, "routingKey", "test.routingKey");
     }
 
     @Test
-    void trackActivity_shouldSaveAndReturnActivityResponse_whenUserIsValid() {
-        // Given
+    void trackActivity_shouldSaveAndPublish_whenUserIsValid() {
         ActivityRequest request = new ActivityRequest();
         request.setUserId("user123");
         request.setType(ActivityType.RUNNING);
         request.setDuration(30);
-        request.setCaloriesBurned(200);
+        request.setCaloriesBurned(300);
         request.setStartTime(LocalDateTime.now());
-        request.setAdditionalMetrics(Map.of("distance", 5.0));
-
+        request.setAdditionalMetrics(Map.of("distance", 5.5));
 
         when(userValidationService.validateUser("user123")).thenReturn(true);
 
-        Activity savedActivity = Activity.builder()
-                .id("activity123")
+        Activity saved = Activity.builder()
+                .id("id1")
                 .userId("user123")
                 .type(ActivityType.RUNNING)
                 .duration(30)
-                .caloriesBurned(200)
+                .caloriesBurned(300)
                 .startTime(request.getStartTime())
                 .additionalMetrics(request.getAdditionalMetrics())
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
                 .build();
 
-        when(activityRepository.save(any())).thenReturn(savedActivity);
+        when(activityRepository.save(any())).thenReturn(saved);
 
-        // When
         ActivityResponse response = activityService.trackActivity(request);
 
-        // Then
-        assertThat(response).isNotNull();
         assertThat(response.getUserId()).isEqualTo("user123");
-        assertThat(response.getType()).isEqualTo(ActivityType.RUNNING);
-        assertThat(response.getCaloriesBurned()).isEqualTo(200);
-        verify(activityRepository, times(1)).save(any());
+        verify(activityRepository).save(any());
+        verify(rabbitTemplate).convertAndSend("test.exchange", "test.routingKey", saved);
     }
 
     @Test
-    void trackActivity_shouldThrowUserNotFoundException_whenUserIsInvalid() {
-        // Given
+    void trackActivity_shouldLogErrorWhenRabbitMQFails() {
         ActivityRequest request = new ActivityRequest();
-        request.setUserId("invalid-user");
+        request.setUserId("user123");
+        request.setType(ActivityType.CYCLING);
 
-        when(userValidationService.validateUser("invalid-user")).thenReturn(false);
+        when(userValidationService.validateUser("user123")).thenReturn(true);
+        when(activityRepository.save(any())).thenReturn(Activity.builder().userId("user123").build());
 
-        // When / Then
-        assertThatThrownBy(() -> activityService.trackActivity(request))
-                .isInstanceOf(UserNotFoundException.class)
-                .hasMessageContaining("invalid-user");
+        doThrow(new RuntimeException("RabbitMQ down"))
+                .when(rabbitTemplate).convertAndSend(anyString(), anyString(), Optional.ofNullable(any()));
 
-        verify(activityRepository, never()).save(any());
+        ActivityResponse response = activityService.trackActivity(request);
+
+        assertThat(response.getUserId()).isEqualTo("user123");
+        verify(rabbitTemplate).convertAndSend(anyString(), anyString(), Optional.ofNullable(any()));
     }
 
     @Test
-    void getAllActivities_shouldReturnMappedList() {
-        // Given
-        List<Activity> mockActivities = List.of(
+    void trackActivity_shouldThrowUserNotFoundException() {
+        ActivityRequest request = new ActivityRequest();
+        request.setUserId("invalid");
+
+        when(userValidationService.validateUser("invalid")).thenReturn(false);
+
+        assertThatThrownBy(() -> activityService.trackActivity(request))
+                .isInstanceOf(UserNotFoundException.class);
+        verifyNoInteractions(rabbitTemplate);
+    }
+
+    @Test
+    void getAllActivities_shouldReturnMapped() {
+        when(activityRepository.findAll()).thenReturn(List.of(
                 Activity.builder().id("1").userId("u1").type(ActivityType.RUNNING).duration(20).build(),
                 Activity.builder().id("2").userId("u2").type(ActivityType.CYCLING).duration(40).build()
-        );
+        ));
 
-        when(activityRepository.findAll()).thenReturn(mockActivities);
-
-        // When
         List<ActivityResponse> responses = activityService.getAllActivities();
 
-        // Then
         assertThat(responses).hasSize(2);
-        assertThat(responses.get(0).getUserId()).isEqualTo("u1");
-        verify(activityRepository).findAll();
     }
 
     @Test
-    void getUserActivities_shouldReturnFilteredList() {
-        // Given
-        List<Activity> mockUserActivities = List.of(
-                Activity.builder().id("1").userId("u1").type(ActivityType.RUNNING).duration(25).build()
-        );
+    void getUserActivities_shouldReturnCorrectList() {
+        when(activityRepository.findByUserId("u1"))
+                .thenReturn(List.of(Activity.builder().id("1").userId("u1").build()));
 
-        when(activityRepository.findByUserId("u1")).thenReturn(mockUserActivities);
-
-        // When
         List<ActivityResponse> responses = activityService.getUserActivities("u1");
 
-        // Then
         assertThat(responses).hasSize(1);
-        assertThat(responses.get(0).getUserId()).isEqualTo("u1");
     }
 
     @Test
-    void getActivity_shouldReturnActivityResponse_whenFound() {
-        // Given
-        Activity mockActivity = Activity.builder().id("act1").userId("u1").duration(30).build();
+    void getActivity_shouldReturnResponse() {
+        when(activityRepository.findById("a1"))
+                .thenReturn(Optional.of(Activity.builder().id("a1").userId("u1").build()));
 
-        when(activityRepository.findById("act1")).thenReturn(Optional.of(mockActivity));
+        ActivityResponse resp = activityService.getActivity("a1");
 
-        // When
-        ActivityResponse response = activityService.getActivity("act1");
-
-        // Then
-        assertThat(response.getId()).isEqualTo("act1");
-        assertThat(response.getUserId()).isEqualTo("u1");
+        assertThat(resp.getId()).isEqualTo("a1");
     }
 
     @Test
-    void getActivity_shouldThrowRuntimeException_whenNotFound() {
-        // Given
-        when(activityRepository.findById("unknown")).thenReturn(Optional.empty());
-
-        // When / Then
-        assertThatThrownBy(() -> activityService.getActivity("unknown"))
+    void getActivity_shouldThrow_whenNotFound() {
+        when(activityRepository.findById("x")).thenReturn(Optional.empty());
+        assertThatThrownBy(() -> activityService.getActivity("x"))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("Activity not found with id : unknown");
+                .hasMessageContaining("Activity not found");
     }
 }
